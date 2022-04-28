@@ -5,8 +5,9 @@ export class InvalidInputError extends Error {
   }
 }
 
-const directions = ["east", "west", "north", "south"];
-
+const directions = ["north", "east", "south", "west"];
+let co = [0,0]
+let inst = []
 export class Robot {
   orient(position) {
     if (!directions.includes(position)) {
@@ -21,27 +22,65 @@ export class Robot {
   }
 
   get coordinates() {
-    //Delete and write code
+    return this.coor
   }
 
   turnRight() {
-    //Delete and write code
+    let index = directions.indexOf(this.location)
+    if(index < 3){
+      index++
+    }else{
+      index = 0
+    }
+    this.location = directions[index]
   }
+  
 
   turnLeft() {
-    //Delete and write code
+    let index = directions.indexOf(this.location)
+    if(index <= 3 && index != 0){
+      index--
+    }else{
+      index = 3
+    }
+    this.location = directions[index]
   }
 
-  at() {
-    //Delete and write code
+  at(x,y) {
+    co[0] = x
+    co[1] = y
+    this.coor = co
   }
 
   advance() {
-    //Delete and write code
+    if( this.location === 'north'){
+      co[1]+=1
+    }
+    else if( this.location === 'south'){
+      co[1]-=1
+    }
+    else if( this.location === 'west'){
+      co[0]-=1
+    }
+    else if( this.location === 'east'){
+      co[0]+=1
+    }
+    this.coor = co
   }
 
-  static instructions() {
-    //Delete and write code
+  static instructions(street) {
+    for (i= 0; i<street.length; i++){
+      if(street[i]=== 'L'){
+        inst.push('turnLeft')
+      }
+      else if(street[i]=== 'R'){
+        inst.push('turnRight')
+      }
+      else if(street[i]=== 'A'){
+        inst.push('advance')
+      }
+    }
+    this.order = inst
   }
   place() {
     //Delete and write code
@@ -50,3 +89,4 @@ export class Robot {
     //Delete and write code
   }
 }
+
