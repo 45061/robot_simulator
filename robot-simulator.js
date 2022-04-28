@@ -69,24 +69,36 @@ export class Robot {
   }
 
   static instructions(street) {
-    for (i= 0; i<street.length; i++){
+    for (let i= 0; i<street.length; i++){
       if(street[i]=== 'L'){
-        inst.push('turnLeft')
+        inst[i] = 'turnLeft'
       }
       else if(street[i]=== 'R'){
-        inst.push('turnRight')
+        inst[i] = 'turnRight'
       }
       else if(street[i]=== 'A'){
-        inst.push('advance')
+        inst[i] = 'advance'
       }
     }
-    this.order = inst
+    return this.order = inst
   }
-  place() {
-    //Delete and write code
+  place(comand) {
+    this.at(comand.x,comand.y)
+    this.orient(comand.direction)
   }
-  evaluate() {
-    //Delete and write code
+  evaluate(street) {
+    instructions(street)
+    for(let i = 0 ; i< this.order.length ; i++){
+      if(this.order[i]==='turnRight'){
+        this.turnRight()
+      }
+      else if(this.order[i]==='turnLeft'){
+        this.turnLeft()
+      }
+      else if(this.order[i]==='advance'){
+        this.advance()
+      }
+    }
   }
 }
 
